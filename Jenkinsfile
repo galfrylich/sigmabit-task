@@ -3,7 +3,7 @@ pipeline {
     environment {
         GitURL = 'https://github.com/galfrylich/sigmabit-task'
         GitcredentialsId = 'afa64820-bb7c-4392-adc2-e997ceb75066'
-        DockerHubCred = 'docker-hub'
+        DockerHubCred = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
     }
     
     stages {
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo '# # # # # STAGE 3 - Push Image # # # # #'
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
+                    docker.withRegistry('https://index.docker.io/v1/', '${DockerHubCred}') {
                         echo "Pushing Docker image with tag: ${dockerImage.tag}"
                         dockerImage.push()        
                     }
