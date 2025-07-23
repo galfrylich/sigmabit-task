@@ -3,6 +3,7 @@ pipeline {
     environment {
         GitURL = 'https://github.com/galfrylich/sigmabit-task'
         GitcredentialsId = 'afa64820-bb7c-4392-adc2-e997ceb75066'
+        DockerHubCred = 'docker-hub'
     }
     
     stages {
@@ -14,11 +15,31 @@ pipeline {
                  extensions: [], 
                  userRemoteConfigs: [[credentialsId: "$GitcredentialsId",
                  url: "$GitURL"]]])
-                 sh 'git branch -a'
-                 sh 'ls -al'
-
             }
         }
+        stage('Build') {
+            steps {
+                echo '# # # # # STAGE 2 - Build Image # # # # #'
+                def imageName = "flask_app:${BUILD_NUMBER}"
+                echo "Building Docker image: ${imageName}"
+                dockerImage = docker.build(imageName, ".")  
+            }
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                echo '# # # # # STAGE 3 - Push Image # # # # #'
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', "${DockerHubCred}") {
+                        echo "Pushing Docker image: ${dockerImage.imageName}"
+                        dockerImage.push("${dockerImage.imageName}")
+                    }
+                }
+            }
+        }
+
+
+
+
         
 }
 }
