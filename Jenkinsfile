@@ -4,6 +4,7 @@ pipeline {
         GitURL = 'https://github.com/galfrylich/sigmabit-task'
         GitcredentialsId = 'afa64820-bb7c-4392-adc2-e997ceb75066'
         DockerHubCred = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
+        ImageName: = 'galfrylich/flask_app'
     }
     
     stages {
@@ -21,7 +22,7 @@ pipeline {
             steps {
                 script {
                     echo '# # # # # STAGE 2 - Build Image # # # # #'
-                def imageName = "flask_app:${BUILD_NUMBER}"
+                def imageName = "${ImageName}:${BUILD_NUMBER}"
                 echo "Building Docker image: ${imageName}"
                 dockerImage = docker.build(imageName, ".")  
                 }
