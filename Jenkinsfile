@@ -31,9 +31,9 @@ pipeline {
             steps {
                 echo '# # # # # STAGE 3 - Push Image # # # # #'
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DockerHubCred) {
+                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
                         echo "Pushing Docker image with tag: ${dockerImage.tag}"
-                        dockerImage.push()           // push build tag, e.g. flask_app:42
+                        dockerImage.push()        
                     }
                 }
             }
