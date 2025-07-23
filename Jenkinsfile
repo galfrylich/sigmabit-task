@@ -19,10 +19,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo '# # # # # STAGE 2 - Build Image # # # # #'
+                script {
+                    echo '# # # # # STAGE 2 - Build Image # # # # #'
                 def imageName = "flask_app:${BUILD_NUMBER}"
                 echo "Building Docker image: ${imageName}"
                 dockerImage = docker.build(imageName, ".")  
+                }
             }
         }
         stage('Push to Docker Hub') {
