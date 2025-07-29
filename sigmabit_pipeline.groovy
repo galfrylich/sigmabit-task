@@ -114,7 +114,7 @@ pipelineJob('run-containers-and-test') {
                         stage('Test Request') {
                             steps {
                                 script {
-                                    def output = sh(script: 'curl -s -o /dev/null -w "%{http_code}" http://localhost:8080', returnStdout: true).trim()
+                                    def output = sh(script: 'curl -s -o -v /dev/null -w "%{http_code}" http://localhost:8081', returnStdout: true).trim()
                                     if (output != '200') {
                                         error("Request failed with status: ${output}")
                                     } else {

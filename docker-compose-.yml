@@ -1,17 +1,19 @@
 version: '3.8'
 
 services:
-  flask-app:
-    image: galfrylich/sigmabit-task:${BUILD_NUMBER}
+  flask_app:
+    image: galfrylich/sigmabit-task:26
     container_name: flask_app
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
     networks:
       - app-network
 
   nginx-proxy:
-    image: galfrylich/nginx-proxy:${BUILD_NUMBER}
+    image: galfrylich/nginx-proxy:26
     container_name: nginx-proxy
     ports:
-      - "80:80"
+      - "8081:80"
     depends_on:
       - flask_app
     networks:
