@@ -106,6 +106,7 @@ pipelineJob('run-containers-and-test') {
 
                         stage('Run Containers via Docker Compose') {
                             steps {
+                                sh 'ls -l'
                                 sh 'docker compose down || true'  // Stop any existing containers
                                 sh 'docker compose up -d'         // Start fresh
                             }
