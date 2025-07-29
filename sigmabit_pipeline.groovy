@@ -91,9 +91,10 @@ pipelineJob('run-containers-and-test') {
                         FLASK_IMAGE = 'galfrylich/sigmabit-task'
                         NGINX_IMAGE = 'galfrylich/nginx-proxy'
                     }
-                    stage('Clean Workspace') {
+                    stages {
+                        stage('Clean Workspace') {
                             steps {
-                                deleteDir()  // 🔧 This ensures old files are removed
+                                deleteDir() // ✅ This cleans up the old workspace
                             }
                         }
                     stages {
