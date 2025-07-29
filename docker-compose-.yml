@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  flask-app:
+    image: galfrylich/sigmabit-task:${BUILD_NUMBER}
+    container_name: flask-app
+    networks:
+      - app-network
+
+  nginx-proxy:
+    image: galfrylich/nginx-proxy:${BUILD_NUMBER}
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - flask-app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

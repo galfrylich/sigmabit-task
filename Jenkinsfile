@@ -4,7 +4,7 @@ pipeline {
         GitURL = 'https://github.com/galfrylich/sigmabit-task'
         GitcredentialsId = 'afa64820-bb7c-4392-adc2-e997ceb75066'
         DockerHubCred = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
-        ImageName = 'galfrylich/flask_app'
+        ImageName = 'galfrylich/sigmabit-task'
     }
     
     stages {
@@ -38,8 +38,30 @@ pipeline {
                 }
             }
         }
+        stage('Build & Push NGINX Proxy') {
+            steps {
+                script {
+                    echo '# # # # # STAGE 4 - Build & Push NGINX Reverse Proxy # # # # #'
+                    def nginxImageName = "galfrylich/nginx-proxy:${BUILD_NUMBER}"
 
+                    // Build NGINX image (assuming Dockerfile.nginx is in ./nginx/)
+                    def nginxDockerImage = docker.build(nginxImageName, "-f Dockerfile.nginx .")
 
+                    docker.withRegistry('https://index.docker.io/v1/', DockerHubCred) {
+                        nginxDockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Run Both Images') {
+            steps {
+                echo '# # # # # STAGE 5 - Run Images # # # # #'
+                script {
+                    docker compose down || true
+                    docker compose up -d
+                }
+            }
+        }
 
         
 }
