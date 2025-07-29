@@ -1,4 +1,4 @@
-// Job DSL Script for Jenkins
+
 
 pipelineJob('build-and-push-flask') {
     definition {
@@ -47,10 +47,22 @@ pipelineJob('build-and-push-nginx') {
                 pipeline {
                     agent any
                     environment {
+                        GIT_CRED_ID = 'afa64820-bb7c-4392-adc2-e997ceb75066'
                         DOCKERHUB_CRED_ID = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
                         IMAGE_NAME = 'galfrylich/nginx-proxy'
                     }
                     stages {
+                        stage('Clone') {
+                            steps {
+                                checkout([$class: 'GitSCM',
+                                    branches: [[name: '*/main']],
+                                    userRemoteConfigs: [[
+                                        url: 'https://github.com/galfrylich/sigmabit-task',
+                                        credentialsId: "${GIT_CRED_ID}"
+                                    ]]
+                                ])
+                            }
+                        }
                         stage('Build NGINX') {
                             steps {
                                 script {
