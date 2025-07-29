@@ -87,18 +87,30 @@ pipelineJob('run-containers-and-test') {
                 pipeline {
                     agent any
                     environment {
+                        GIT_CRED_ID = 'afa64820-bb7c-4392-adc2-e997ceb75066'
                         FLASK_IMAGE = 'galfrylich/sigmabit-task'
                         NGINX_IMAGE = 'galfrylich/nginx-proxy'
                     }
                     stages {
-                        stage('Run Containers') {
+                        stage('Checkout') {
                             steps {
-                                sh 'docker rm -f flask || true'
-                                sh 'docker rm -f nginx || true'
-                                sh 'docker run -d --name flask ${FLASK_IMAGE}:${BUILD_NUMBER}'
-                                sh 'docker run -d --name nginx -p 8080:80 ${NGINX_IMAGE}:${BUILD_NUMBER}'
+                                checkout([$class: 'GitSCM',
+                                    branches: [[name: '*/main']],
+                                    userRemoteConfigs: [[
+                                        url: 'https://github.com/galfrylich/sigmabit-task',
+                                        credentialsId: "${GIT_CRED_ID}"
+                                    ]]
+                                ])
                             }
                         }
+
+                        stage('Run Containers via Docker Compose') {
+                            steps {
+                                sh 'docker compose down || true'  // Stop any existing containers
+                                sh 'docker compose up -d'         // Start fresh
+                            }
+                        }
+
                         stage('Test Request') {
                             steps {
                                 script {
@@ -111,9 +123,16 @@ pipelineJob('run-containers-and-test') {
                                 }
                             }
                         }
+
+                        stage('Tear Down') {
+                            steps {
+                                sh 'docker compose down'
+                            }
+                        }
                     }
                 }
             ''')
         }
     }
 }
+
