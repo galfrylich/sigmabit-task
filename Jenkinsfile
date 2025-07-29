@@ -56,8 +56,8 @@ pipeline {
             steps {
                 echo '# # # # # STAGE 5 - Run Images # # # # #'
                 script {
-                    docker-compose down
-                    docker-compose up -d
+                   sh docker-compose down
+                   sh docker-compose up -d
                 }
             }
         }
