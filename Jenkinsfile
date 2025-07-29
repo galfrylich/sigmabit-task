@@ -43,8 +43,7 @@ pipeline {
                 script {
                     echo '# # # # # STAGE 4 - Build & Push NGINX Reverse Proxy # # # # #'
                     def nginxImageName = "galfrylich/nginx-proxy:${BUILD_NUMBER}"
-
-                    // Build NGINX image (assuming Dockerfile.nginx is in ./nginx/)
+                    
                     def nginxDockerImage = docker.build(nginxImageName, "-f Dockerfile.nginx .")
 
                     docker.withRegistry('https://index.docker.io/v1/', DockerHubCred) {
@@ -57,7 +56,7 @@ pipeline {
             steps {
                 echo '# # # # # STAGE 5 - Run Images # # # # #'
                 script {
-                    docker compose down || true
+                    docker compose down
                     docker compose up -d
                 }
             }
