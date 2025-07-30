@@ -8,10 +8,10 @@ pipelineJob('build-and-push-flask') {
                     agent any
                     environment {
                         GIT_CRED_ID = '5fedf31c-e5aa-4d8b-8e0a-7367231eaf72	'
-                        DOCKERHUB_CRED_ID = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
+                        DOCKERHUB_CRED_ID = '08ae2d95-b16c-4123-bdd8-5ac427619449'
                         IMAGE_NAME = 'galfrylich/sigmabit-task'
                     }
-                    
+
                     stages {
 
                         stage('Clean Workspace') {
@@ -56,7 +56,7 @@ pipelineJob('build-and-push-nginx') {
                     agent any
                     environment {
                         GIT_CRED_ID = '5fedf31c-e5aa-4d8b-8e0a-7367231eaf72	'
-                        DOCKERHUB_CRED_ID = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
+                        DOCKERHUB_CRED_ID = '08ae2d95-b16c-4123-bdd8-5ac427619449'
                         IMAGE_NAME = 'galfrylich/nginx-proxy'
                     }
                     stages {
