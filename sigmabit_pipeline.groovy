@@ -7,11 +7,18 @@ pipelineJob('build-and-push-flask') {
                 pipeline {
                     agent any
                     environment {
-                        GIT_CRED_ID = '01211468-36c0-4303-ac68-c604dd1d51d6'
+                        GIT_CRED_ID = '5fedf31c-e5aa-4d8b-8e0a-7367231eaf72	'
                         DOCKERHUB_CRED_ID = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
                         IMAGE_NAME = 'galfrylich/sigmabit-task'
                     }
                     stages {
+
+                        stage('Clean Workspace') {
+                            steps {
+                                deleteDir() // ✅ This cleans up the
+                            }
+                        }
+
                         stage('Clone') {
                             steps {
                                 checkout([$class: 'GitSCM',
@@ -47,11 +54,16 @@ pipelineJob('build-and-push-nginx') {
                 pipeline {
                     agent any
                     environment {
-                        GIT_CRED_ID = '01211468-36c0-4303-ac68-c604dd1d51d6'
+                        GIT_CRED_ID = '5fedf31c-e5aa-4d8b-8e0a-7367231eaf72	'
                         DOCKERHUB_CRED_ID = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
                         IMAGE_NAME = 'galfrylich/nginx-proxy'
                     }
                     stages {
+                        stage('Clean Workspace') {
+                            steps {
+                                deleteDir() // ✅ This cleans up the
+                            }
+                        }
                         stage('Clone') {
                             steps {
                                 checkout([$class: 'GitSCM',
@@ -87,7 +99,7 @@ pipelineJob('run-containers-and-test') {
                 pipeline {
                     agent any
                     environment {
-                        GIT_CRED_ID = '01211468-36c0-4303-ac68-c604dd1d51d6'
+                        GIT_CRED_ID = '5fedf31c-e5aa-4d8b-8e0a-7367231eaf72	'
                         FLASK_IMAGE = 'galfrylich/sigmabit-task'
                         NGINX_IMAGE = 'galfrylich/nginx-proxy'
                     }
