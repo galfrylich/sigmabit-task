@@ -96,7 +96,7 @@ pipelineJob('run-containers-and-test') {
 
                         stage('Clean Workspace') {
                             steps {
-                                deleteDir() // ✅ This cleans up the old workspace
+                                deleteDir() // ✅ This cleans up the old 
                             }
                         }
 
