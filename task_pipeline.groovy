@@ -1,5 +1,5 @@
 def repoUrl = 'https://github.com/galfrylich/sigmabit-task'
-def gitCreds = '6b80b596-d980-4953-ab1e-8079798cd255'
+def gitCreds = '01211468-36c0-4303-ac68-c604dd1d51d6'
 def dockerCreds = '08ae2d95-b16c-4123-bdd8-5ac427619449	'
 
 pipelineJob('build-and-push-flask') {
