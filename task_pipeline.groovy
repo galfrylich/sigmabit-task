@@ -16,8 +16,8 @@ pipelineJob('build-and-push-flask') {
             scm {
                 git {
                     remote {
-                        url(repoUrl)
-                        credentials(gitCreds)
+                        url('https://github.com/galfrylich/sigmabit-task')
+                        credentials('01211468-36c0-4303-ac68-c604dd1d51d6')
                     }
                     branches('*/main')
                 }
