@@ -11,6 +11,7 @@ pipelineJob('build-and-push-flask') {
                         DOCKERHUB_CRED_ID = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
                         IMAGE_NAME = 'galfrylich/sigmabit-task'
                     }
+                    
                     stages {
 
                         stage('Clean Workspace') {
