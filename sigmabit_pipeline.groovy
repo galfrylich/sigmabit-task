@@ -7,7 +7,7 @@ pipelineJob('build-and-push-flask') {
                 pipeline {
                     agent any
                     environment {
-                        GIT_CRED_ID = 'afa64820-bb7c-4392-adc2-e997ceb75066'
+                        GIT_CRED_ID = '01211468-36c0-4303-ac68-c604dd1d51d6'
                         DOCKERHUB_CRED_ID = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
                         IMAGE_NAME = 'galfrylich/sigmabit-task'
                     }
@@ -47,7 +47,7 @@ pipelineJob('build-and-push-nginx') {
                 pipeline {
                     agent any
                     environment {
-                        GIT_CRED_ID = 'afa64820-bb7c-4392-adc2-e997ceb75066'
+                        GIT_CRED_ID = '01211468-36c0-4303-ac68-c604dd1d51d6'
                         DOCKERHUB_CRED_ID = 'ee194876-8dee-4634-b1cf-535ea8fe0f67'
                         IMAGE_NAME = 'galfrylich/nginx-proxy'
                     }
@@ -87,7 +87,7 @@ pipelineJob('run-containers-and-test') {
                 pipeline {
                     agent any
                     environment {
-                        GIT_CRED_ID = 'afa64820-bb7c-4392-adc2-e997ceb75066'
+                        GIT_CRED_ID = '01211468-36c0-4303-ac68-c604dd1d51d6'
                         FLASK_IMAGE = 'galfrylich/sigmabit-task'
                         NGINX_IMAGE = 'galfrylich/nginx-proxy'
                     }
