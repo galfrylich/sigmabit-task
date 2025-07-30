@@ -1,0 +1,20 @@
+persistence:
+  enabled: true
+  size: 5Gi
+
+mariadb:
+  enabled: true
+
+service:
+  type: NodePort
+  nodePort: 32080
+
+containerPort: 8080
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 63Mi
+  limits:
+    cpu: 50m
+    memory: 63Mi
