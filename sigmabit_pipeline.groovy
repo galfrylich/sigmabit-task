@@ -7,7 +7,7 @@ pipelineJob('build-and-push-flask') {
                 pipeline {
                     agent any
                     environment {
-                        GIT_CRED_ID = '5fedf31c-e5aa-4d8b-8e0a-7367231eaf72	'
+                        GIT_CRED_ID = '5fedf31c-e5aa-4d8b-8e0a-7367231eaf72'
                         DOCKERHUB_CRED_ID = '08ae2d95-b16c-4123-bdd8-5ac427619449'
                         IMAGE_NAME = 'galfrylich/sigmabit-task'
                     }
