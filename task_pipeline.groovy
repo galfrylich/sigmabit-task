@@ -17,12 +17,12 @@ pipelineJob('build-and-push-flask') {
                 git {
                     remote {
                         url('https://github.com/galfrylich/sigmabit-task')
-                        credentialsId('5fedf31c-e5aa-4d8b-8e0a-7367231eaf72')
+                        credentials('5fedf31c-e5aa-4d8b-8e0a-7367231eaf72') // Jenkins credentials ID
                     }
                     branches('*/main')
                 }
             }
-            scriptPath('flask_app.groovy')
+            scriptPath('flask_app.groovy') // This must match the filename in your Git repo
         }
     }
 }
