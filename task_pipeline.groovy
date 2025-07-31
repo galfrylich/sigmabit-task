@@ -17,7 +17,7 @@ pipelineJob('build-and-push-flask') {
                 git {
                     remote {
                         url('https://github.com/galfrylich/sigmabit-task')
-                        credentials('5fedf31c-e5aa-4d8b-8e0a-7367231eaf72')
+                        credentialsId('5fedf31c-e5aa-4d8b-8e0a-7367231eaf72')
                     }
                     branches('*/main')
                 }
@@ -42,7 +42,7 @@ pipelineJob('build-and-push-nginx') {
                 git {
                     remote {
                         url(repoUrl)
-                        credentials(gitCreds)
+                        credentialsId(gitCreds)
                     }
                     branches('*/main')
                 }
@@ -67,7 +67,7 @@ pipelineJob('run-containers-and-test') {
                 git {
                     remote {
                         url(repoUrl)
-                        credentials(gitCreds)
+                        credentialsId(gitCreds)
                     }
                     branches('*/main')
                 }
