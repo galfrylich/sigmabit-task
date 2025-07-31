@@ -10,21 +10,20 @@ pipelineJob('build-and-push-flask') {
         stringParam('DOCKERHUB_CRED_ID', dockerCreds, 'DockerHub Credentials ID')
         stringParam('IMAGE_NAME', 'galfrylich/sigmabit-task', 'Flask image name')
     }
-
     definition {
-        cpsScm {
-            scm {
-                git {
-                    remote {
-                        url(repoUrl)
-                        credentials(gitCreds) // Jenkins credentials ID
-                    }
-                    branches('*/main')
+    cpsScm {
+        scm {
+            git {
+                remote {
+                    url('https://github.com/jenkinsci/pipeline-examples.git')
                 }
+                branches('*/master')
             }
-            scriptPath('flask_app.groovy') // This must match the filename in your Git repo
         }
+        scriptPath('flask_app.groovy') // (or any real file)
     }
+}
+    
 }
 
 pipelineJob('build-and-push-nginx') {
