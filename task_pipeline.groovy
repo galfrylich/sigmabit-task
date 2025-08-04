@@ -42,7 +42,7 @@ pipelineJob('build-and-push-nginx') {
                 git {
                     remote {
                         url(repoUrl)
-                        credentialsId(gitCreds)
+                        credentials(gitCreds)
                     }
                     branches('*/main')
                 }
@@ -67,7 +67,7 @@ pipelineJob('run-containers-and-test') {
                 git {
                     remote {
                         url(repoUrl)
-                        credentialsId(gitCreds)
+                        credentials(gitCreds)
                     }
                     branches('*/main')
                 }
